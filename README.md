@@ -35,4 +35,43 @@ A complete offline-capable expense tracker with USD→INR currency conversion, c
 ### Clone the repository
 
 git clone https://github.com/your-username/expense-tracker.git
+
 cd expense-tracker
+
+### Backend Setup
+- cd backend
+- npm install
+- npm run start   # or: npm start
+
+Backend will run on: http://localhost:4000
+
+### Frontend Setup
+- cd frontend
+- npm install
+- echo "VITE_API_URL=http://localhost:4000/api" > .env
+- npm run dev
+
+Frontend will run on: http://localhost:5173
+
+##  API Overview
+
+| Method | Endpoint                          | Description             |
+| ------ | --------------------------------- | ----------------------- |
+| GET    | `/api/health`                     | Health check            |
+| GET    | `/api/rate`                       | Get cached USD→INR rate |
+| POST   | `/api/rate/refresh`               | Force refresh rate      |
+| GET    | `/api/transactions`               | List all transactions   |
+| POST   | `/api/transactions`               | Add transaction         |
+| GET    | `/api/transactions/summary`       | Get summary data        |
+| POST   | `/api/transactions/retry-pending` | Convert all pending USD |
+
+## Additional Notes
+API cache TTL: 15 minutes.
+
+If API is unavailable, USD transactions are stored as pending and converted when the rate becomes available.
+
+Category colors in the pie chart are consistent across refreshes
+
+## License
+MIT
+
